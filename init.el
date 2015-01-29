@@ -35,11 +35,13 @@
     (package-refresh-contents))
 
 
-(ensure-package-installed 'magit 'paredit 'rainbow-delimiters 'geiser 'color-theme 'solarized-theme 'tango-2-theme 'leuven-theme 'racket-mode 'company)
+(ensure-package-installed 'magit 'paredit 'rainbow-delimiters 'geiser 'color-theme 'solarized-theme 'tango-2-theme 'leuven-theme 'racket-mode 'company 'multiple-cursors)
  
-
+(require 'multiple-cursors)
 (require 'ido)
 (ido-mode t)
+
+
 
 ;; Scheme hooks
 (add-hook 
@@ -96,7 +98,14 @@
 (load-theme 'wombat t)
 
 ;; dont create backup files
-(setq make-backup-files nil) 
+(setq make-backup-files nil)
+
+(require 'multiple-cursors)
+(global-set-key (kbd "C-*") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-+") 'mc/mark-all-like-this)
+
 
 (load "~/.emacs.d/helper.el")
 (custom-set-variables
@@ -116,4 +125,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Courier 10 Pitch" :foundry "bitstream" :slant normal :weight normal :height 98 :width normal)))))
+ '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 113 :width normal)))))
