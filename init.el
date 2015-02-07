@@ -35,12 +35,14 @@
     (package-refresh-contents))
 
 
-(ensure-package-installed 'magit 'paredit 'rainbow-delimiters 'geiser 'color-theme 'solarized-theme 'tango-2-theme 'leuven-theme 'racket-mode 'company 'multiple-cursors)
+(ensure-package-installed 'magit 'paredit 'rainbow-delimiters 'geiser 'color-theme 'solarized-theme 'tango-2-theme 'leuven-theme 'racket-mode 'company 'multiple-cursors 'flycheck)
  
 (require 'multiple-cursors)
 (require 'ido)
 (ido-mode t)
-
+(setq
+ ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
+		      "*Messages*" "Async Shell Command"))
 
 
 ;; Scheme hooks
@@ -78,10 +80,14 @@
       scroll-step 1
       scroll-conservatively 10000
       scroll-preserve-screen-position 1)
-;; Basic Behavior -> enter to indent
-(define-key global-map (kbd "RET") 'newline-and-indent)
-;; Use Chicken Scheme by default
 
+;; keys customization
+(define-key global-map (kbd "RET") 'newline-and-indent)
+(global-set-key [f7] (lambda () (interactive) (find-file user-init-file)))
+
+
+
+;; Use Chicken Scheme by default
 (global-hl-line-mode 0)
 ;; Geiser Configuration
 (setq geiser-impl-installed-implementations '(racket guile))
