@@ -29,6 +29,20 @@
 
 
 
+
+
 (global-set-key (kbd "<C-f5>") 'kibo:eval-and-replace)
 
 
+(defun toggle-window-dedicated ()
+  "Control whether or not Emacs is allowed to display another
+buffer in current window."
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window (not (window-dedicated-p window))))
+       "%s: Can't touch this!"
+     "%s is up for grabs.")
+   (current-buffer)))
+
+(global-set-key (kbd "C-c t") 'toggle-window-dedicated)
